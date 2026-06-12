@@ -4,69 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mr Samz - Live TV</title>
-    <!-- Clappr Player Main Script -->
+    <!-- Clappr Player Script -->
     <script src="https://cdn.jsdelivr.net/npm/clappr@latest/dist/clappr.min.js"></script>
     <style>
-        body {
-            background-color: #111;
-            color: white;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 20px;
+        body { 
+            background-color: #111; 
+            color: white; 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            margin: 0; 
+            padding: 20px; 
         }
-        h1 { color: #ff3e3e; }
-        .player-container {
-            max-width: 800px;
-            margin: 20px auto;
-            border: 2px solid #333;
-            background: #000;
+        h1 { color: #ff3e3e; margin-bottom: 5px; }
+        .sub-title { color: #aaa; font-size: 14px; margin-bottom: 20px; }
+        .player-container { 
+            max-width: 800px; 
+            margin: 20px auto; 
+            border: 2px solid #333; 
+            background: #000; 
+            border-radius: 8px;
+            overflow: hidden;
         }
-        .btn-container {
-            margin-top: 20px;
+        .btn-container { margin-top: 20px; }
+        .channel-btn { 
+            background: #222; 
+            color: #fff; 
+            border: 1px solid #444; 
+            padding: 12px 24px; 
+            margin: 8px; 
+            cursor: pointer; 
+            font-size: 16px; 
+            border-radius: 5px; 
+            font-weight: bold;
+            transition: 0.3s;
         }
-        .channel-btn {
-            background: #222;
-            color: #fff;
-            border: 1px solid #444;
-            padding: 10px 20px;
-            margin: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            border-radius: 5px;
-        }
-        .channel-btn:hover {
-            background: #ff3e3e;
-        }
+        .channel-btn:hover { background: #ff3e3e; border-color: #ff3e3e; }
     </style>
 </head>
 <body>
 
     <h1>Mr Samz Live TV Portal</h1>
-    <p>নিচের বাটনে ক্লিক করে চ্যানেল পরিবর্তন করুন</p>
+    <div class="sub-title">নিচের বাটনে ক্লিক করে চ্যানেল প্লে করুন</div>
 
     <!-- ভিডিও প্লেয়ার এরিয়া -->
     <div class="player-container">
         <div id="player"></div>
     </div>
 
-    <!-- চ্যানেল সিলেক্ট করার বাটন -->
+    <!-- কাজের জন্য সচল আইপিটিভি বাটনসমূহ -->
     <div class="btn-container">
-        <button class="channel-btn" onclick="changeChannel('https://bppltv.dotstream.tv/direct/tsports-hd/index.m3u8')">T Sports Live</button>
-        <button class="channel-btn" onclick="changeChannel('https://raw.githubusercontent.com/imShakil/tvlink/refs/heads/main/iptv.m3u8')">All Bangla Channels</button>
+        <button class="channel-btn" onclick="changeChannel('https://iptv-org.github.io/iptv/countries/bd.m3u')">🇧🇩 সব বাংলা চ্যানেল</button>
+        <button class="channel-btn" onclick="changeChannel('https://iptv-org.github.io/iptv/categories/sports.m3u')">⚽ স্পোর্টস (খেলাধুলার চ্যানেল)</button>
     </div>
 
     <script>
-        // ডিফল্টভাবে প্রথমে T Sports চালু হবে
+        // পেজ ওপেন হলেই প্রথম চ্যানেল লিস্টটি লোড হবে
         var player = new Clappr.Player({
-            source: "https://bppltv.dotstream.tv/direct/tsports-hd/index.m3u8",
+            source: "https://iptv-org.github.io/iptv/countries/bd.m3u",
             parentId: "#player",
             width: "100%",
-            height: "450px",
-            autoPlay: true
+            height: "400px",
+            autoPlay: true,
+            mute: false
         });
 
-        // বাটন ক্লিক করলে চ্যানেল চেঞ্জ হওয়ার ফাংশন
+        // বাটন টিপলে চ্যানেল বদলানোর ফাংশন
         function changeChannel(url) {
             player.load(url);
             player.play();
